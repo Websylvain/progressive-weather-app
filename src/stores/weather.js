@@ -37,9 +37,9 @@ export default new Vuex.Store({
         }
     },
     actions:{
-        //api.openweathermap.org/data/2.5/forecast?id=524901&APPID=1111111111 
+        // CALL API FIRST TIME
         loadWeather:(context, payload) => {
-            axios.get('http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID='+ OWMKEY)
+            axios.get('http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID='+ OWMKEY + '&cnt=20')
             .then((response)=>{
                 console.log("success", response.data)
                 context.commit('SET_LOCATION', response.data.city)
@@ -51,4 +51,3 @@ export default new Vuex.Store({
         }
     }
 })
-

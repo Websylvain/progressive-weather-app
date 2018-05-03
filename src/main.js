@@ -8,6 +8,8 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 Vue.config.productionTip = false
 
+require('@/assets/weather-icons/css/weather-icons.css');
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
