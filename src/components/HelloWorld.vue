@@ -1,12 +1,16 @@
 <template>
   <main class="hello">
     <aside class="flickrBg" v-lazyimg="getFlickImg()"></aside>
+
     <header class="currentWeather" v-if="weather.main">
-      <h1><span v-round="weather.main.temp"></span>°</h1>
-      <h2>{{location.name}}, {{location.country}}</h2>
+      <h1>
+        <span v-round="weather.main.temp"></span>°
+      </h1>
+      <p class="location">{{location.name}}, {{location.country}} | <i :class="'wi wi-owm-'+ weather.weather[0].id"></i> | {{weather.main.temp_max}}°C / {{weather.main.temp_min}}°C </p>
       <p>{{weather.weather[0].description}}</p>
     </header>
     <Previsions :data="previsions"></Previsions>
+
   </main>
 </template>
 
@@ -44,11 +48,12 @@ export default {
 </script>
 
 <style>
-  .hello{
-    padding-top:35%;
+  body{
+    margin:0px;
   }
   .currentWeather{
     text-align: center;
+    padding-top: 50%;
   }
   .currentWeather h1{
     margin:0px;
@@ -58,14 +63,20 @@ export default {
     margin:0px;
     text-transform: uppercase;
   }
+  .currentWeather .location{
+    font-size:16px;
+  }
   .flickrBg{
     position: fixed;
     z-index: -10;
     top: 0; left: 0; right: 0; bottom: 0;
-    height: 100%; width:100%; 
+    height: 100%; width:100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
   }
 </style>

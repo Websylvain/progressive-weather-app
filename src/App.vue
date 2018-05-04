@@ -26,7 +26,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -41,17 +41,17 @@ export default {
 
 #app.app--day{
   background: rgb(246,230,180);
-  background: -moz-linear-gradient(top, rgba(246,230,180,1) 0%, rgba(237,144,23,1) 100%);
-  background: -webkit-linear-gradient(top, rgba(246,230,180,1) 0%,rgba(237,144,23,1) 100%);
-  background: linear-gradient(to bottom, rgba(246,230,180,1) 0%,rgba(237,144,23,1) 100%);
+  background: -moz-linear-gradient(top, rgba(246,230,180,0.8) 0%, rgba(237,144,23,0.8) 100%);
+  background: -webkit-linear-gradient(top, rgba(246,230,180,0.8) 0%,rgba(237,144,23,0.8) 100%);
+  background: linear-gradient(to bottom, rgba(246,230,180,0.8) 0%,rgba(237,144,23,0.8) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 );
 }
 
 #app.app--night {
   background: rgb(114,94,127);
-  background: -moz-linear-gradient(top, rgba(114,94,127,1) 0%, rgba(13,40,137,1) 100%);
-  background: -webkit-linear-gradient(top, rgba(114,94,127,1) 0%,rgba(13,40,137,1) 100%);
-  background: linear-gradient(to bottom, rgba(114,94,127,1) 0%,rgba(13,40,137,1) 100%);
+  background: -moz-linear-gradient(top, rgba(114,94,127,0.8) 0%, rgba(13,40,137,0.8) 100%);
+  background: -webkit-linear-gradient(top, rgba(114,94,127,0.8) 0%,rgba(13,40,137,0.8) 100%);
+  background: linear-gradient(to bottom, rgba(114,94,127,0.8) 0%,rgba(13,40,137,0.8) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#725e7f', endColorstr='#0d2889',GradientType=0 );
 }
 

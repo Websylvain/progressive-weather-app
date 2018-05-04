@@ -2,14 +2,16 @@
   <section class="previsions">
     <ul>
         <li v-for="p in data">
-          <div class="day">
+          <span class="day">
             {{p.dt_txt}}
-          </div>
-          <div class="temp">
+          </span>
+          <span class="temp">
             <span v-round="p.main.temp"></span>
             °C
-          </div>   
-          <i :class=" 'icon wi wi-owm-'+ p.weather[0].id"></i>
+          </span>
+          <span class="logo">
+            <i :class=" 'icon wi wi-owm-'+ p.weather[0].id"></i>
+          </span>
         </li>
     </ul>
   </section>
@@ -44,21 +46,4 @@ export default {
     padding: 20px 0px 20px 0px;
   }
 
-  .day, .temp, .icon{
-    display: table-cell;
-    vertical-align: middle;
-  }
-
-  .day{
-    width:50%;
-  }
-
-  .temp{
-    width:35%;text-align:right;
-  }
-
-  .icon{
-    text-align:center;
-    width: 15%;    font-size: 25px;
-  }
 </style>
