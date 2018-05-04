@@ -54,4 +54,8 @@ export default {
   background: linear-gradient(to bottom, rgba(114,94,127,1) 0%,rgba(13,40,137,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#725e7f', endColorstr='#0d2889',GradientType=0 );
 }
+
+p{
+  margin-top:0px;
+}
 </style>

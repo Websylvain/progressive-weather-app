@@ -1,9 +1,10 @@
 <template>
   <main class="hello">
-
+    <aside class="flickrBg" v-lazyimg="getFlickImg()"></aside>
     <header class="currentWeather" v-if="weather.main">
-      <h1 v-KelvToCelcius="weather.main.temp"></h1>
-      <p>{{location.name}}, {{location.country}}</p>
+      <h1><span v-round="weather.main.temp"></span>°</h1>
+      <h2>{{location.name}}, {{location.country}}</h2>
+      <p>{{weather.weather[0].description}}</p>
     </header>
     <Previsions :data="previsions"></Previsions>
   </main>
@@ -12,32 +13,31 @@
 <script>
 import weather from '@/stores/weather.js'
 import { mapGetters, mapActions } from 'vuex'
-
 import Previsions from '@/components/Previsions'
+
+import myDirectives from '@/directives/MyDirectives.js'
+
 export default {
   name: 'HelloWorld',
   store: weather,
   components:{Previsions},
-  directives: {
-    KelvToCelcius:{
-      bind(el, binding, vnode){
-        el.innerHTML = Math.round(binding.value -273.15) + "°C";
-      }
-    }
-  },
+  directives: myDirectives,
   mounted(){
     this.$store.dispatch('loadWeather');
   },
   methods:{
-    kelvinToCelcius(kelvin){
-      return (300 - kelvin);
+    getFlickImg(){
+      // 'https://farm' + flickr.farm + '.staticflickr.com/' + flickr.server + '/' + flickr.id + '_' + flickr.secret + '.jpg'
+      let img = 'https://farm' + this.flickr.farm + '.staticflickr.com/' + this.flickr.server + '/' + this.flickr.id + '_' + this.flickr.secret + '.jpg';
+      return img;
     }
   },
   computed:{
     ...mapGetters([
       'weather',
       'location',
-      'previsions'
+      'previsions',
+      'flickr'
     ])
   }
 }
@@ -45,13 +45,27 @@ export default {
 
 <style>
   .hello{
-    padding-top:25%;
+    padding-top:35%;
   }
   .currentWeather{
     text-align: center;
   }
   .currentWeather h1{
-    font-size:80px;
-    margin-bottom:0px;
+    margin:0px;
+    font-size:110px;
+  }
+  .currentWeather h2{
+    margin:0px;
+    text-transform: uppercase;
+  }
+  .flickrBg{
+    position: fixed;
+    z-index: -10;
+    top: 0; left: 0; right: 0; bottom: 0;
+    height: 100%; width:100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
   }
 </style>
