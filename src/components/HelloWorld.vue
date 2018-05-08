@@ -6,10 +6,18 @@
       <h1>
         <span v-round="weather.main.temp"></span>°
       </h1>
-      <p class="location">{{location.name}}, {{location.country}} | <i :class="'wi wi-owm-'+ weather.weather[0].id"></i> | {{weather.main.temp_max}}°C / {{weather.main.temp_min}}°C </p>
-      <p>{{weather.weather[0].description}}</p>
+      <div class="location">
+        <p class="location--name">{{location.name}}, {{location.country}}</p>
+        <p>{{weather.weather[0].description}}</p>
+      </div>
     </header>
-    <Previsions :data="previsions"></Previsions>
+    <section class="weatherSum" v-if="weather.main">
+      <div><i class="wi wi-direction-up"></i> <span>{{weather.main.temp_max}}°</span></div>
+      <div><i class="wi wi-direction-down"></i> <span>{{weather.main.temp_min}}°</span></div>
+      <div><i class="wi wi-strong-wind"></i> <span>{{weather.wind.speed}} m/s</span></div>
+      <div>  <i class="wi wi-humidity"></i> <span>{{weather.main.humidity}}%</span></div>
+    </section>
+    <Previsions :data="previsionsByDays"></Previsions>
 
   </main>
 </template>
@@ -40,6 +48,7 @@ export default {
     ...mapGetters([
       'weather',
       'location',
+      'previsionsByDays',
       'previsions',
       'flickr'
     ])
@@ -53,19 +62,42 @@ export default {
   }
   .currentWeather{
     text-align: center;
-    padding-top: 50%;
+    padding-top: 40%;
+    padding-bottom:20%;
   }
   .currentWeather h1{
     margin:0px;
     font-size:110px;
   }
-  .currentWeather h2{
-    margin:0px;
+
+  .currentWeather .location{
     text-transform: uppercase;
   }
-  .currentWeather .location{
+
+  .currentWeather .location .location--name{
+    font-weight: bold;
+    margin-bottom:10px;
+  }
+
+  .weatherSum{
     font-size:16px;
   }
+
+  .weatherSum div{
+    display:inline-block;
+    vertical-align: middle;
+    width: 24%
+  }
+
+  .weatherSum div i, .weatherSum div span{
+    display: block;
+  }
+
+  .weatherSum div i{
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
   .flickrBg{
     position: fixed;
     z-index: -10;

@@ -1,7 +1,6 @@
 const lazyLoadImage = (el, src) => {
     let img = new Image()
     img.onload = () => {
-      console.log(el.tagName);
       el.style.backgroundImage = `url(${src})`
     }
     img.src = src
@@ -31,4 +30,3 @@ export default {
         unbind(el){}
     }
 }
-
