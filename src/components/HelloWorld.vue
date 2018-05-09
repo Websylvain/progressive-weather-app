@@ -11,13 +11,27 @@
         <p>{{weather.weather[0].description}}</p>
       </div>
     </header>
+
     <section class="weatherSum" v-if="weather.main">
-      <div><i class="wi wi-direction-up"></i> <span>{{weather.main.temp_max}}°</span></div>
-      <div><i class="wi wi-direction-down"></i> <span>{{weather.main.temp_min}}°</span></div>
-      <div><i class="wi wi-strong-wind"></i> <span>{{weather.wind.speed}} m/s</span></div>
-      <div>  <i class="wi wi-humidity"></i> <span>{{weather.main.humidity}}%</span></div>
+      <div>
+        <i class="wi wi-direction-up"></i>
+        <span>{{weather.main.temp_max}}°</span>
+      </div>
+      <div>
+        <i class="wi wi-direction-down"></i>
+        <span>{{weather.main.temp_min}}°</span>
+      </div>
+      <div>
+        <i class="wi wi-strong-wind"></i>
+        <span>{{weather.wind.speed}} m/s</span>
+      </div>
+      <div>
+        <i class="wi wi-humidity"></i>
+        <span>{{weather.main.humidity}}%</span>
+      </div>
     </section>
-    <Previsions :data="previsionsByDays"></Previsions>
+
+    <Previsions :data="previsionsByDays" v-if="previsionsByDays"></Previsions>
 
   </main>
 </template>
