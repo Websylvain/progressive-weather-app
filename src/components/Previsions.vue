@@ -2,13 +2,16 @@
   <section class="previsions">
     <ul>
         <li v-for="p in data">
-          <span class="label">
-            <i :class=" 'icon wi wi-owm-'+ p.weather[0].id"></i>
-            {{p.dt_txt}}
-          </span>
-          <span class="temp">
-            <span v-round="p.main.temp"></span>°
-          </span>
+          <v-layout>
+            <v-flex class="label" xs9>
+              <i :class=" 'icon wi wi-owm-'+ p.weather[0].id"></i>
+              {{p.dt_txt}}
+            </v-flex>
+            <v-flex class="temp" xs3>
+              <span v-round="p.main.temp"></span>°
+            </v-flex>
+
+          </v-layout>
         </li>
     </ul>
   </section>
@@ -46,11 +49,13 @@ export default {
   .previsions ul li .label, .previsions ul li .temp {
     display:inline-block;
   }
-  .previsions ul li .label{
-    width:80%;
+
+  .previsions .icon{
+    color:white;
   }
   .previsions ul li .temp{
-    width:18%;text-align:center;    font-size: 25px;
+    text-align:right;
+    font-size: 25px;
   }
   .previsions ul li .label .icon{
     font-size:30px;margin-right: 15px;

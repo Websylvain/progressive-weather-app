@@ -1,5 +1,5 @@
 <template>
-  <main class="hello">
+  <section class="hello">
     <aside class="flickrBg" v-lazyimg="getFlickImg()"></aside>
 
     <header class="currentWeather" v-if="weather.main">
@@ -12,28 +12,28 @@
       </div>
     </header>
 
-    <section class="weatherSum" v-if="weather.main">
-      <div>
+    <v-layout class="weatherSum" v-if="weather.main">
+      <v-flex xs3>
         <i class="wi wi-direction-up"></i>
         <span>{{weather.main.temp_max}}°</span>
-      </div>
-      <div>
+      </v-flex>
+      <v-flex xs3>
         <i class="wi wi-direction-down"></i>
         <span>{{weather.main.temp_min}}°</span>
-      </div>
-      <div>
+      </v-flex>
+      <v-flex  xs3>
         <i class="wi wi-strong-wind"></i>
         <span>{{weather.wind.speed}} m/s</span>
-      </div>
-      <div>
+      </v-flex>
+      <v-flex xs3>
         <i class="wi wi-humidity"></i>
         <span>{{weather.main.humidity}}%</span>
-      </div>
-    </section>
+      </v-flex>
+    </v-layout>
 
     <Previsions :data="previsionsByDays" v-if="previsionsByDays"></Previsions>
 
-  </main>
+  </section>
 </template>
 
 <script>
@@ -76,8 +76,8 @@ export default {
   }
   .currentWeather{
     text-align: center;
-    padding-top: 40%;
-    padding-bottom:20%;
+    padding-top: 25%;
+    padding-bottom:25%;
   }
   .currentWeather h1{
     margin:0px;
@@ -95,12 +95,6 @@ export default {
 
   .weatherSum{
     font-size:16px;
-  }
-
-  .weatherSum div{
-    display:inline-block;
-    vertical-align: middle;
-    width: 24%
   }
 
   .weatherSum div i, .weatherSum div span{

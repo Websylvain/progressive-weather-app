@@ -1,17 +1,33 @@
 <template>
-  <div id="app" :class="period">
-    <router-view/>
-  </div>
+  <v-app id="app" :class="period">
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      app
+    >
+      <navigation></navigation>
+    </v-navigation-drawer>
+    <v-toolbar app flat dark absolute color="transparent">
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>P.W.A WEATHER</v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+        <router-view/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
+import navigation from '@/components/ui/navigation'
 export default {
   name: 'App',
   data(){
     return {
-      date: new Date
+      date: new Date,
+      drawer: false
     }
   },
+  components: {navigation},
   computed: {
     year(){
       return this.date.getFullYear();
