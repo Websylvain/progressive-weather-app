@@ -63,7 +63,13 @@ export default new Vuex.Store({
         // CALL API FIRST TIME
         loadWeather:(context, payload) => {
             //console.log("payload",payload);
-            let queryChain = 'lat='+payload.lat+'&lon='+payload.long
+            let queryChain = "";
+            if(payload.lat  != undefined && payload.long != undefined){
+              queryChain = 'lat='+payload.lat+'&lon='+payload.long
+            }
+            else{
+              queryChain = "q="+ payload;
+            }
 
             // GET FULL DATAS
             axios.get('http://api.openweathermap.org/data/2.5/forecast?'+ queryChain +'&APPID='+ OWMKEY + '&units=metric')
@@ -73,7 +79,8 @@ export default new Vuex.Store({
                     context.commit('SET_WEATHER', response.data.list)
 
                     // GET BG FROM FLICKR API
-                    axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+FLICKRKEY+'&content_type=1&privacy_filter=1&tags=landscape&has_geo=2&radius=32&'+queryChain+'&per_page=1&page=1&accuracy=11&sort=interestingness-asc&format=json&nojsoncallback=1')
+                    axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+FLICKRKEY
+                    +'&content_type=1&privacy_filter=1&tags=landscape&has_geo=2&radius=32'+ "&lat="+response.data.city.coord.lat+"&lon="+response.data.city.coord.lon+'&per_page=1&page=1&accuracy=11&sort=interestingness-asc&format=json&nojsoncallback=1')
                         .then(response=>{
                             console.log('success', response.data);
                             context.commit('SET_LOCATION_PIX', response.data.photos.photo[0])
