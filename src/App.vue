@@ -1,19 +1,33 @@
 <template>
   <v-app id="app" :class="period">
-    <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" fixed app >
       <navigation></navigation>
     </v-navigation-drawer>
     <v-toolbar app flat dark absolute color="transparent">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>P.W.A WEATHER</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon @click.native.stop="dialog = true">
+        <v-icon>search</v-icon>
+      </v-btn>
+      <v-btn icon @click.native.stop="dialog = true">
+        <v-icon>my_location</v-icon>
+      </v-btn>
     </v-toolbar>
     <v-content>
         <router-view/>
     </v-content>
+    <v-dialog v-model="dialog" max-width="290">
+      <v-card>
+        <v-card-title class="headline">Use Google's location service?</v-card-title>
+        <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Disagree</v-btn>
+          <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Agree</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
@@ -24,7 +38,8 @@ export default {
   data(){
     return {
       date: new Date,
-      drawer: false
+      drawer: false,
+      dialog: false
     }
   },
   components: {navigation},
