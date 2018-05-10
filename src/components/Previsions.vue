@@ -5,7 +5,7 @@
           <v-layout>
             <v-flex class="label" xs9>
               <i :class=" 'icon wi wi-owm-'+ p.weather[0].id"></i>
-              {{p.dt_txt}}
+              <span v-getDayFromDate="p.dt_txt"></span>
             </v-flex>
             <v-flex class="temp" xs3>
               <span v-round="p.main.temp"></span>°

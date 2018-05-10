@@ -48,9 +48,6 @@ export default {
   store: weather,
   components:{Previsions},
   directives: myDirectives,
-  mounted(){
-    this.$store.dispatch('loadWeather');
-  },
   methods:{
     getFlickImg(){
       // 'https://farm' + flickr.farm + '.staticflickr.com/' + flickr.server + '/' + flickr.id + '_' + flickr.secret + '.jpg'

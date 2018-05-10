@@ -62,7 +62,8 @@ export default new Vuex.Store({
     actions:{
         // CALL API FIRST TIME
         loadWeather:(context, payload) => {
-            let queryChain = 'lat=43.212161&lon=2.353663'
+            //console.log("payload",payload);
+            let queryChain = 'lat='+payload.lat+'&lon='+payload.long
 
             // GET FULL DATAS
             axios.get('http://api.openweathermap.org/data/2.5/forecast?'+ queryChain +'&APPID='+ OWMKEY + '&units=metric')

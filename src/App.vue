@@ -10,12 +10,14 @@
       <v-btn icon @click.native.stop="dialog = true">
         <v-icon>search</v-icon>
       </v-btn>
-      <v-btn icon @click.native.stop="dialog = true">
+      <v-btn icon @click.native.stop="geoLocation()">
         <v-icon>my_location</v-icon>
       </v-btn>
     </v-toolbar>
     <v-content>
+      <!-- CONTENT -->
         <router-view/>
+      <!-- END CONTENT -->
     </v-content>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
@@ -32,17 +34,45 @@
 </template>
 
 <script>
-import navigation from '@/components/ui/navigation'
+import navigation from '@/components/ui/navigation';
+import weather from '@/stores/weather.js'
 export default {
   name: 'App',
+  store: weather,
   data(){
     return {
       date: new Date,
       drawer: false,
-      dialog: false
+      dialog: false,
+      geohash: {}
     }
   },
   components: {navigation},
+  mounted(){
+    this.geoLocation();
+  },
+  methods:{
+    geoLocation(){
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+              this.geohash = {
+                lat: position.coords.latitude,
+                long: position.coords.longitude,
+                precision: this.precision
+              }
+
+              //console.log("GEOLOCATION", geohash);
+              this.$store.dispatch('loadWeather', this.geohash); // LUNCH STORE WITH USER LOCATION
+
+          }, (err) => {
+              // error handling here
+              console.log("GEOLOCATION ERR", err);
+          })
+      } else {
+          console.error('Cannot access geolocation')
+      }
+    }
+  },
   computed: {
     year(){
       return this.date.getFullYear();
