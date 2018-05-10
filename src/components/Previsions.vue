@@ -4,7 +4,7 @@
         <li v-for="p in data">
           <span class="label">
             <i :class=" 'icon wi wi-owm-'+ p.weather[0].id"></i>
-            {{p.dt_txt}}
+            <span href="" v-getDayFromDate="p.dt_txt"></span>
           </span>
           <span class="temp">
             <span v-round="p.main.temp"></span>°
