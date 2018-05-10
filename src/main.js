@@ -4,11 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuex from 'vuex'
+import Vuetify from 'vuetify'
 
+Vue.use(Vuetify)
 Vue.use(Vuex);
+
 Vue.config.productionTip = false
 
 require('@/assets/weather-icons/css/weather-icons.css');
+import 'vuetify/dist/vuetify.min.css';
 
 /* eslint-disable no-new */
 new Vue({
