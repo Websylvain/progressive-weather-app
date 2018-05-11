@@ -24,8 +24,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Cancel</v-btn>
-          <v-btn color="green darken-1" flat="flat" @click.native="manualSearchLocation()">Search</v-btn>
+          <v-btn flat="flat" @click.native="dialog = false">Cancel</v-btn>
+          <v-btn flat="flat" @click.native="manualSearchLocation()">Search</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

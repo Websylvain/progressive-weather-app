@@ -12,6 +12,11 @@
       </div>
     </header>
 
+    <p class="chooseView">
+      <span class="chooseView--left" :class="{active: typeOfView == 'list'}" @click.stop.prevent="typeOfView = 'list'">list</span>
+      <span class="chooseView--right" :class="{active: typeOfView == 'charts'}"  @click.stop.prevent="typeOfView = 'charts'">charts</span>
+    </p>
+
     <v-layout class="weatherSum" v-if="weather.main">
       <v-flex xs3>
         <i class="wi wi-direction-up"></i>
@@ -32,13 +37,12 @@
     </v-layout>
 
     <PrevisionsCharts
+      v-if="typeOfView == 'charts'"
       :data="previsionsByDays"
-      v-if="previsionsByDays"
       :options="{responsive: true, maintainAspectRatio: true}"
       :width="400"
       :height="300"></PrevisionsCharts>
-
-    <Previsions :data="previsionsByDays" v-if="previsionsByDays"></Previsions>
+    <Previsions v-if="typeOfView == 'list'" :data="previsionsByDays"></Previsions>
 
   </section>
 </template>
@@ -55,6 +59,11 @@ export default {
   store: weather,
   components:{Previsions, PrevisionsCharts},
   directives: myDirectives,
+  data () {
+    return {
+        typeOfView: "list"
+    }
+  },
   methods:{
     getFlickImg(){
       // 'https://farm' + flickr.farm + '.staticflickr.com/' + flickr.server + '/' + flickr.id + '_' + flickr.secret + '.jpg'
@@ -81,7 +90,7 @@ export default {
   .currentWeather{
     text-align: center;
     padding-top: 25%;
-    padding-bottom:25%;
+    padding-bottom:15%;
   }
   .currentWeather h1{
     margin:0px;
@@ -110,6 +119,34 @@ export default {
     font-size: 20px;
     margin-bottom: 10px;
   }
+
+  .chooseView{
+    font-size:0px;
+    margin-bottom: 15%;
+    text-transform: uppercase;
+  }
+
+  .chooseView .chooseView--left,.chooseView .chooseView--right  {
+    font-size: 15px;
+    border: 1px solid #fff;
+    margin:0;
+    padding:5px;
+    display: inline-block;
+  }
+
+  .chooseView .chooseView--left{
+    border-radius: 5px 0px 0px 5px;
+  }
+
+  .chooseView .active {
+    color: black;   border: 1px solid #000;
+  }
+
+  .chooseView .chooseView--right{
+    border-radius: 0px 5px 5px 0px;
+  }
+
+
 
   .flickrBg{
     position: fixed;
