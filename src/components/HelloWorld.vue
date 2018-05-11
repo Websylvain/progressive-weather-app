@@ -31,6 +31,13 @@
       </v-flex>
     </v-layout>
 
+    <PrevisionsCharts
+      :data="previsionsByDays"
+      v-if="previsionsByDays"
+      :options="{responsive: true, maintainAspectRatio: true}"
+      :width="400"
+      :height="300"></PrevisionsCharts>
+
     <Previsions :data="previsionsByDays" v-if="previsionsByDays"></Previsions>
 
   </section>
@@ -40,13 +47,13 @@
 import weather from '@/stores/weather.js'
 import { mapGetters } from 'vuex'
 import Previsions from '@/components/Previsions'
-
+import PrevisionsCharts from '@/components/PrevisionsCharts'
 import myDirectives from '@/directives/MyDirectives.js'
 
 export default {
   name: 'HelloWorld',
   store: weather,
-  components:{Previsions},
+  components:{Previsions, PrevisionsCharts},
   directives: myDirectives,
   methods:{
     getFlickImg(){
@@ -92,6 +99,7 @@ export default {
 
   .weatherSum{
     font-size:16px;
+    margin-bottom:5%;
   }
 
   .weatherSum div i, .weatherSum div span{

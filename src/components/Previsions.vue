@@ -35,7 +35,7 @@ export default {
 
 <style>
   .previsions{
-    margin:5% 0px 0% 0px;
+    margin:0% 0px 0% 0px;
     text-align:left;
   }
   .previsions ul{
