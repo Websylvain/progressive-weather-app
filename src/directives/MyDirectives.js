@@ -15,6 +15,9 @@ export default {
     round:{
       bind(el, binding, vnode){
         el.innerHTML = Math.round(binding.value);
+      },
+      update(el, binding, vnode){
+        el.innerHTML = Math.round(binding.value);
       }
     },
     lazyimg: {

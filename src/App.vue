@@ -1,16 +1,12 @@
 <template>
   <v-app id="app" :class="period">
-    <v-navigation-drawer v-model="drawer" fixed app >
-      <navigation></navigation>
-    </v-navigation-drawer>
     <v-toolbar app flat dark absolute color="transparent">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>P.W.A WEATHER</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click.native.stop="dialog = true">
         <v-icon>search</v-icon>
       </v-btn>
-      <v-btn icon @click.native.stop="geoLocation()">
+      <v-btn icon @click.native.stop="initLocation()">
         <v-icon>my_location</v-icon>
       </v-btn>
     </v-toolbar>
@@ -44,23 +40,26 @@ export default {
   data(){
     return {
       date: new Date,
-      drawer: false,
       dialog: false,
       geohash: {},
-      manualSearch: ""
+      manualSearch: "",
+      geoLocation: false
     }
   },
   components: {navigation},
   mounted(){
-    this.geoLocation();
+    this.initLocation();
   },
   methods:{
     manualSearchLocation(){
       this.$store.dispatch('loadWeather', this.manualSearch); // LUNCH STORE WITH LOCATION
-      this.dialog = false
+      this.dialog = false;
+      this.manualSearch = "";
     },
-    geoLocation(){
+    initLocation(){
       if (navigator.geolocation) {
+          this.geoLocation = true;
+          // GET POSITION
           navigator.geolocation.getCurrentPosition((position) => {
               this.geohash = {
                 lat: position.coords.latitude,
