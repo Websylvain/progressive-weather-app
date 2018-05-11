@@ -38,7 +38,7 @@
 
 <script>
 import weather from '@/stores/weather.js'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import Previsions from '@/components/Previsions'
 
 import myDirectives from '@/directives/MyDirectives.js'

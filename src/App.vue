@@ -11,8 +11,9 @@
       </v-btn>
     </v-toolbar>
     <v-content>
+      <v-progress-circular :size="70" :width="7" indeterminate v-if="loading"></v-progress-circular>
       <!-- CONTENT -->
-        <router-view/>
+      <router-view v-else/>
       <!-- END CONTENT -->
     </v-content>
     <v-dialog v-model="dialog" max-width="290">
@@ -32,6 +33,7 @@
 </template>
 
 <script>
+import { mapGetters} from 'vuex'
 import navigation from '@/components/ui/navigation';
 import weather from '@/stores/weather.js'
 export default {
@@ -80,6 +82,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'loading'
+    ]),
     year(){
       return this.date.getFullYear();
     },
@@ -175,4 +180,17 @@ table {
 p{
   margin-top:0px;
 }
+
+.progress-circular {
+    position: relative;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
 </style>

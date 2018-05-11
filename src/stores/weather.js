@@ -16,7 +16,8 @@ export default new Vuex.Store({
         },
         previsions: [],
         weather:  {},
-        flickrImg: {}
+        flickrImg: {},
+        loading: true
     },
     getters:{
         weather: state => {
@@ -45,6 +46,9 @@ export default new Vuex.Store({
         },
         flickr: state => {
             return state.flickrImg;
+        },
+        loading: state =>{
+          return state.loading;
         }
     },
     mutations:{
@@ -58,11 +62,15 @@ export default new Vuex.Store({
         },
         SET_LOCATION_PIX: (state, flickrImg) => {
             state.flickrImg = flickrImg;
+        },
+        SET_LOADING: (state, bool) => {
+            state.loading = bool;
         }
     },
     actions:{
         // CALL API FIRST TIME
         loadWeather:(context, payload) => {
+          context.commit('SET_LOADING', true);
             //console.log("payload",payload);
             let queryChain = "";
             if(payload.lat  != undefined && payload.long != undefined){
@@ -71,13 +79,13 @@ export default new Vuex.Store({
             else{
               queryChain = "q="+ payload;
             }
-
             // GET FULL DATAS
             axios.get('http://api.openweathermap.org/data/2.5/forecast?'+ queryChain +'&APPID='+ OWMKEY + '&units=metric')
                 .then((response)=>{
                     console.log("success", response.data)
                     context.commit('SET_LOCATION', response.data.city)
                     context.commit('SET_WEATHER', response.data.list)
+                    context.commit('SET_LOADING', false);
                     // GET BG FROM FLICKR API
                     axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+FLICKRKEY
                     +'&content_type=1&privacy_filter=1&tags=landscape&has_geo=2&radius=32'+ "&lat="+response.data.city.coord.lat+"&lon="+response.data.city.coord.lon+'&per_page=1&page=1&accuracy=11&sort=interestingness-asc&format=json&nojsoncallback=1')
