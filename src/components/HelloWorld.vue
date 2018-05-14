@@ -36,10 +36,31 @@
       </v-flex>
     </v-layout>
 
-    <PrevisionsCharts
+    <PrevisionsCharts style="margin-bottom:25px"
       v-if="typeOfView == 'charts'"
       :data="previsionsByDays"
-      :options="{responsive: true, maintainAspectRatio: true}"
+      :options="{
+          legend: {
+             labels: {
+                  fontColor: 'white'
+                 }
+          },
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true,
+                      fontColor: 'white'
+                  },
+              }],
+            xAxes: [{
+                  ticks: {
+                      fontColor: 'white'
+                  },
+              }]
+          }
+        }"
       :width="400"
       :height="300"></PrevisionsCharts>
     <Previsions v-if="typeOfView == 'list'" :data="previsionsByDays"></Previsions>
