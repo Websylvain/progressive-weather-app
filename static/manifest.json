@@ -1,0 +1,31 @@
+{
+  "name": "PWA WEATHER By Websylvain",
+  "short_name": "PWA WEATHER",
+  "icons": [
+    {
+      "src": "/static/logo-min.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/logo-min.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/logo-min.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/logo-min.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#2196f3",
+  "theme_color": "#2196f3"
+}
