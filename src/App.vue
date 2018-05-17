@@ -182,11 +182,10 @@ p{
 }
 
 .progress-circular {
-    position: relative;
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
-    position: absolute;
+    position: absolute!important;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

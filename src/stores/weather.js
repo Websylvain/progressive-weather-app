@@ -80,7 +80,7 @@ export default new Vuex.Store({
               queryChain = "q="+ payload;
             }
             // GET FULL DATAS
-            axios.get('http://api.openweathermap.org/data/2.5/forecast?'+ queryChain +'&APPID='+ OWMKEY + '&units=metric')
+            axios.get('https://api.openweathermap.org/data/2.5/forecast?'+ queryChain +'&APPID='+ OWMKEY + '&units=metric')
                 .then((response)=>{
                     console.log("success", response.data)
                     context.commit('SET_LOCATION', response.data.city)

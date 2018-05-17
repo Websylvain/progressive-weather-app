@@ -110,8 +110,8 @@ export default {
   }
   .currentWeather{
     text-align: center;
-    padding-top: 25%;
-    padding-bottom:15%;
+    padding-top: 20%;
+    padding-bottom: 15%;
   }
   .currentWeather h1{
     margin:0px;

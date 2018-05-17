@@ -51,7 +51,7 @@ export default {
   }
 
   .previsions .icon{
-    color:white;
+    color:white!important;
   }
   .previsions ul li .temp{
     text-align:right;
