@@ -20,7 +20,7 @@
       <v-card>
         <v-card-title class="headline">Choose your location...</v-card-title>
         <v-card-text>
-          <v-text-field id="testing" v-model="manualSearch" label="Location" ></v-text-field>
+          <v-text-field id="testing" v-model="manualSearch" @keyup.enter="manualSearchLocation()"label="Location" ></v-text-field>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
