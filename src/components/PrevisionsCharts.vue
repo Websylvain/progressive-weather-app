@@ -26,10 +26,10 @@ export default {
           label: 'Humidity',
           data: humidity,
           fill: 0,
-          borderColor: '#ffffff52',
-          pointBackgroundColor: '#ffffff52',
-          pointBorderColor: '#ffffff52',
-          backgroundColor: '#ffffff52'
+          borderColor: '#000',
+          pointBackgroundColor: '#000',
+          pointBorderColor: '#000',
+          backgroundColor: '#000'
         }
       ]
     }, this.options)

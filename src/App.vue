@@ -1,7 +1,13 @@
 <template>
   <v-app id="app" :class="period">
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      app
+    >
+    </v-navigation-drawer>
     <v-toolbar app flat dark absolute color="transparent">
-      <v-toolbar-title>P.W.A WEATHER</v-toolbar-title>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
       <v-btn icon @click.native.stop="dialog = true">
         <v-icon>search</v-icon>
@@ -41,6 +47,7 @@ export default {
   store: weather,
   data(){
     return {
+      drawer: false,
       date: new Date,
       dialog: false,
       geohash: {},
@@ -146,12 +153,14 @@ table {
 	border-spacing: 0;
 }
 
-
+.content{
+  padding-top: 0px!important;
+  color:black;
+}
 #app {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #fff;
   font-size: 20px;
   width:100%;
@@ -162,20 +171,20 @@ table {
 }
 
 #app.app--day{
-  background: rgb(246,230,180) fixed;
+  /*background: rgb(246,230,180) fixed;
   background: -moz-linear-gradient(top, rgba(246,230,180,0.8) 0%, rgba(237,144,23,0.85) 100%) fixed;
   background: -webkit-linear-gradient(top, rgba(246,230,180,0.8) 0%,rgba(237,144,23,0.85) 100%) fixed;
   background: linear-gradient(to bottom, rgba(246,230,180,0.8) 0%,rgba(237,144,23,0.85) 100%) fixed;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 );
-}
+*/}
 
 #app.app--night {
-  background: rgb(114,94,127);
+  /*background: rgb(114,94,127);
   background: -moz-linear-gradient(top, rgba(114,94,127,0.8) 0%, rgba(13,40,137,0.85) 100%) fixed;
   background: -webkit-linear-gradient(top, rgba(114,94,127,0.8) 0%,rgba(13,40,137,0.85) 100%) fixed;
   background: linear-gradient(to bottom, rgba(114,94,127,0.8) 0%,rgba(13,40,137,0.85) 100%) fixed;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#725e7f', endColorstr='#0d2889',GradientType=0 );
-}
+*/}
 
 p{
   margin-top:0px;

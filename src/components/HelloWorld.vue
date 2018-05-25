@@ -1,70 +1,59 @@
 <template>
   <section class="hello">
-    <aside class="flickrBg" v-lazyimg="getFlickImg()"></aside>
-
-    <header class="currentWeather" v-if="weather.main">
-      <h1>
-        <span v-round="weather.main.temp"></span>°
+    <header class="currentWeather" v-if="weather.main" v-lazyimg="getFlickImg()">
+      <h1 class="location">
+        <span class="country">{{location.country}}</span>
+        <span class="city">{{location.name}}</span>
       </h1>
-      <div class="location">
-        <p class="location--name">{{location.name}}, {{location.country}}</p>
-        <p>{{weather.weather[0].description}}</p>
-      </div>
+      <v-layout class="hero">
+        <v-flex xs7>
+          <div class="hero--temp">
+            <span v-round="weather.main.temp"></span>°
+          </div>
+          <div class="hero--description">
+            <p>
+              <i v-if="weather.sys.pod == 'd'" :class="'wi wi-owm-day-' + weather.weather[0].id"></i>
+              <i v-if="weather.sys.pod == 'n'" :class="'wi wi-owm-night-' + weather.weather[0].id"></i>
+              {{weather.weather[0].description}}
+            </p>
+            <p><i class="wi wi-strong-wind"></i> {{weather.wind.speed}} m/s</p>
+            <p><i class="wi wi-humidity"></i><span> {{weather.main.humidity}}%</span></p>
+          </div>
+        </v-flex>
+        <v-flex xs5>
+        </v-flex>
+      </v-layout>
     </header>
-
-    <p class="chooseView">
-      <span class="chooseView--left" :class="{active: typeOfView == 'list'}" @click.stop.prevent="typeOfView = 'list'">list</span>
-      <span class="chooseView--right" :class="{active: typeOfView == 'charts'}"  @click.stop.prevent="typeOfView = 'charts'">charts</span>
-    </p>
-
-    <v-layout class="weatherSum" v-if="weather.main">
-      <v-flex xs3>
-        <i class="wi wi-direction-up"></i>
-        <span>{{weather.main.temp_max}}°</span>
-      </v-flex>
-      <v-flex xs3>
-        <i class="wi wi-direction-down"></i>
-        <span>{{weather.main.temp_min}}°</span>
-      </v-flex>
-      <v-flex  xs3>
-        <i class="wi wi-strong-wind"></i>
-        <span>{{weather.wind.speed}} m/s</span>
-      </v-flex>
-      <v-flex xs3>
-        <i class="wi wi-humidity"></i>
-        <span>{{weather.main.humidity}}%</span>
-      </v-flex>
-    </v-layout>
-
-    <PrevisionsCharts style="margin-bottom:25px"
-      v-if="typeOfView == 'charts'"
-      :data="previsionsByDays"
-      :options="{
-          legend: {
-             labels: {
-                  fontColor: 'white'
-                 }
-          },
-          responsive: true,
-          maintainAspectRatio: true,
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero:true,
-                      fontColor: 'white'
-                  },
-              }],
-            xAxes: [{
-                  ticks: {
-                      fontColor: 'white'
-                  },
-              }]
-          }
-        }"
-      :width="400"
-      :height="300"></PrevisionsCharts>
-    <Previsions v-if="typeOfView == 'list'" :data="previsionsByDays"></Previsions>
-
+    <section class="weatherSum">
+      <PrevisionsCharts style="margin-bottom:25px"
+        v-if="typeOfView == 'charts'"
+        :data="previsionsByDays"
+        :options="{
+            legend: {
+               labels: {
+                    fontColor: '#000'
+                   }
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        fontColor: '#000'
+                    },
+                }],
+              xAxes: [{
+                    ticks: {
+                        fontColor: '#000'
+                    },
+                }]
+            }
+          }"
+        :width="400"
+        :height="300"></PrevisionsCharts>
+      <Previsions v-if="typeOfView == 'list'" :data="previsionsByDays"></Previsions>
+    </section>
   </section>
 </template>
 
@@ -108,43 +97,52 @@ export default {
   body{
     margin:0px;
   }
+
   .currentWeather{
+    color:white;
+    padding-top: 40%;
+    padding-bottom: 5%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+  }
+
+  .hero{
+    padding: 0px 15px 0px 15px;
+  }
+  .hero .hero--temp{
+    font-size: 100px;
+    line-height: 100px;
+  }
+
+  .hero .hero--description .wi{
+    width: 20%;
+    display: inline-block;
+  }
+
+  .location{
+    margin-bottom: 20%;
     text-align: center;
-    padding-top: 20%;
-    padding-bottom: 15%;
-  }
-  .currentWeather h1{
-    margin:0px;
-    font-size:110px;
-  }
-
-  .currentWeather .location{
     text-transform: uppercase;
+    position: relative;
   }
 
-  .currentWeather .location .location--name{
-    font-weight: bold;
-    margin-bottom:10px;
+  .location .city{
+      font-size: 40px;    font-weight: bold;
   }
 
-  .weatherSum{
-    font-size:16px;
-    margin-bottom:5%;
+  .location .country{
+    opacity: 0.5;
+      font-size: 110px;    font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
   }
-
-  .weatherSum div i, .weatherSum div span{
-    display: block;
-  }
-
-  .weatherSum div i{
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-
   .chooseView{
     font-size:0px;
     margin-bottom: 15%;
-    text-transform: uppercase;
+    text-transform: uppercase;text-align: center;
   }
 
   .chooseView .chooseView--left,.chooseView .chooseView--right  {

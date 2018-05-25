@@ -35,6 +35,7 @@ export default {
 
 <style>
   .previsions{
+    color: black;
     margin:0% 0px 0% 0px;
     text-align:left;
   }
@@ -50,9 +51,6 @@ export default {
     display:inline-block;
   }
 
-  .previsions .icon{
-    color:white!important;
-  }
   .previsions ul li .temp{
     text-align:right;
     font-size: 25px;
