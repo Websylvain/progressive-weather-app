@@ -44,7 +44,7 @@ export default {
     padding:0px 15px 0px 15px;
   }
   .previsions ul li{
-    border-top:0.3px solid #ffffffb8;
+    /*border-top:0.3px solid #000000b8;*/
     padding: 25px 0px 25px 0px;
   }
   .previsions ul li .label, .previsions ul li .temp {

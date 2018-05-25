@@ -5,6 +5,7 @@
       fixed
       app
     >
+      <navigation></navigation>
     </v-navigation-drawer>
     <v-toolbar app flat dark absolute color="transparent">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>

@@ -25,6 +25,17 @@
       </v-layout>
     </header>
     <section class="weatherSum">
+      <v-btn
+              absolute
+              dark
+              fab
+              top
+              right
+              color="pink"
+            @click="changeTypeOfView">
+              <v-icon v-if="typeOfView == 'list'">show_chart</v-icon>
+              <v-icon v-else >format_list_bulleted</v-icon>
+        </v-btn>
       <PrevisionsCharts style="margin-bottom:25px"
         v-if="typeOfView == 'charts'"
         :data="previsionsByDays"
@@ -79,6 +90,13 @@ export default {
       // 'https://farm' + flickr.farm + '.staticflickr.com/' + flickr.server + '/' + flickr.id + '_' + flickr.secret + '.jpg'
       let img = 'https://farm' + this.flickr.farm + '.staticflickr.com/' + this.flickr.server + '/' + this.flickr.id + '_' + this.flickr.secret + '.jpg';
       return img;
+    },
+    changeTypeOfView(){
+      if(this.typeOfView == 'list'){
+        this.typeOfView = 'charts';
+      }else{
+        this.typeOfView = 'list';
+      }
     }
   },
   computed:{
@@ -100,7 +118,7 @@ export default {
 
   .currentWeather{
     color:white;
-    padding-top: 40%;
+    padding-top: 50%;
     padding-bottom: 5%;
     background-size: cover;
     background-attachment: fixed;
@@ -132,52 +150,17 @@ export default {
   }
 
   .location .country{
-    opacity: 0.5;
-      font-size: 110px;    font-weight: bold;
+      opacity: 0.45;
+      font-size: 120px;    font-weight: bold;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
   }
-  .chooseView{
-    font-size:0px;
-    margin-bottom: 15%;
-    text-transform: uppercase;text-align: center;
+
+  .weatherSum{
+    position: relative;
+    padding-top: 20px;
   }
 
-  .chooseView .chooseView--left,.chooseView .chooseView--right  {
-    font-size: 15px;
-    border: 1px solid #fff;
-    margin:0;
-    padding:5px;
-    display: inline-block;
-  }
-
-  .chooseView .chooseView--left{
-    border-radius: 5px 0px 0px 5px;
-  }
-
-  .chooseView .active {
-    color: black;   border: 1px solid #000;
-  }
-
-  .chooseView .chooseView--right{
-    border-radius: 0px 5px 5px 0px;
-  }
-
-
-
-  .flickrBg{
-    position: fixed;
-    z-index: -10;
-    top: 0; left: 0; right: 0; bottom: 0;
-    height: 100%; width:100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-  }
 </style>
