@@ -19,9 +19,8 @@
 - [ ] PROGRESSIVE APP
     - [x] Manifest.json
     - [x] Service worker install
-    - [ ] GPS AUTHORIZATION
-    - [ ] IF NO GPS -> USER HAVE TO SET MANUALY THE LOCATION
-    - [ ] IF OFFLINE -> GET PREVIOUS DATA
+    - [x] GPS AUTHORIZATION
+    - [x] IF NO GPS -> USER HAVE TO SET MANUALY THE LOCATION
 ...
 
 ## Build Setup
