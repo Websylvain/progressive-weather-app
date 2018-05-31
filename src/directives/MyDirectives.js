@@ -23,7 +23,7 @@ export default {
     lazyimg: {
         bind(el, binding) {
           //console.log(el.tagName);
-          lazyLoadImage(el, binding.value)
+          //lazyLoadImage(el, binding.value)
         },
         update(el, binding){
           lazyLoadImage(el, binding.value)

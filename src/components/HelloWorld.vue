@@ -118,15 +118,14 @@ export default {
 
   .currentWeather{
     color:white;
-    padding-top: 50%;
-    padding-bottom: 5%;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
+    padding-top:200px;
   }
 
   .hero{
-    padding: 0px 15px 0px 15px;
+    padding: 15px;
   }
   .hero .hero--temp{
     font-size: 100px;
@@ -134,15 +133,14 @@ export default {
   }
 
   .hero .hero--description .wi{
-    width: 20%;
+    width: 35px;
     display: inline-block;
   }
 
   .location{
-    margin-bottom: 20%;
     text-align: center;
     text-transform: uppercase;
-    position: relative;
+    position: relative;margin-bottom:50px;
   }
 
   .location .city{

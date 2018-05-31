@@ -65,27 +65,47 @@ export default {
       this.$store.dispatch('loadWeather', this.manualSearch); // LUNCH STORE WITH LOCATION
       this.dialog = false;
       this.manualSearch = "";
+
+      if(this.$route.name == 'error'){
+        this.$router.push('/');
+      }
+
     },
     initLocation(){
       if (navigator.geolocation) {
           this.geoLocation = true;
           // GET POSITION
           navigator.geolocation.getCurrentPosition((position) => {
+
+
+
               this.geohash = {
                 lat: position.coords.latitude,
                 long: position.coords.longitude,
                 precision: this.precision
               }
 
-              //console.log("GEOLOCATION", geohash);
-              this.$store.dispatch('loadWeather', this.geohash); // LUNCH STORE WITH USER LOCATION
+              //IF NOT RETURN TO HELLO VIEW
+              if(this.$route.name == 'error'){
+                this.$router.push('/');
+              }
+              // API OPEN WEATHER MAP SEARCH
+              this.$store.dispatch('setGeo', true);
+              this.$store.dispatch('loadWeather', this.geohash);
+
 
           }, (err) => {
               // error handling here
               console.log("GEOLOCATION ERR", err);
+              // NO SEARCH & GO TO ERROR PAGE
+              this.$store.dispatch('setGeo', false);
+              this.$router.push('/error');
+
           })
       } else {
-          console.error('Cannot access geolocation')
+          console.error('Cannot access geolocation');
+          this.$store.dispatch('setGeo', false);
+          this.$router.push('/error');
       }
     }
   },
