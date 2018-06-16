@@ -18,10 +18,7 @@ export default new Vuex.Store({
         weather:  {},
         flickrImg: {},
         loading: true,
-        params:{
-          geo: false,
-          network: true
-        }
+        error: null
     },
     getters:{
         weather: state => {
@@ -54,8 +51,8 @@ export default new Vuex.Store({
         loading: state =>{
           return state.loading;
         },
-        params: state =>{
-          return state.params;
+        error: state =>{
+          return state.error;
         }
     },
     mutations:{
@@ -72,25 +69,13 @@ export default new Vuex.Store({
         SET_LOADING: (state, bool) => {
             state.loading = bool;
         },
-        SET_GEO: (state, bool) =>{
-          state.params.geo = bool;
-        },
-        SET_NETWORK: (state, bool) =>{
-          state.params.network = true;
+        SET_ERROR: (state, error) =>{
+          state.error = error;
         }
     },
     actions:{
-        setGeo:(context, bool) =>{
-          context.commit('SET_GEO', bool);
-          if(!bool){
-            context.commit('SET_LOADING', false);
-          }
-        },
-        setNetwork: (context, bool) =>{
-          context.commit('SET_NETWORK', bool);
-          if(!bool){
-            context.commit('SET_LOADING', false);
-          }
+        setLoading:(context, bool) =>{
+            context.commit('SET_LOADING', bool);
         },
         // CALL API FIRST TIME
         loadWeather:(context, payload) => {
@@ -111,10 +96,10 @@ export default new Vuex.Store({
                     context.commit('SET_LOCATION', response.data.city);
                     context.commit('SET_WEATHER', response.data.list);
                     context.commit('SET_LOADING', false);
-
+                    context.commit('SET_ERROR', null)
                     // GET BG FROM FLICKR API
                     axios.get('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+FLICKRKEY
-                    +'&content_type=1&privacy_filter=1&tags=landscape&has_geo=2&radius=32'+ "&lat="+response.data.city.coord.lat+"&lon="+response.data.city.coord.lon+'&per_page=1&page=1&accuracy=11&sort=interestingness-asc&format=json&nojsoncallback=1')
+                    +'&media=photos&content_type=1&privacy_filter=1&tags=landscape&radius=32'+ "&lat="+response.data.city.coord.lat+"&lon="+response.data.city.coord.lon+'&per_page=1&page=1&accuracy=11&content_type=1&sort=relevance&format=json&nojsoncallback=1')
                         .then(response=>{
                             console.log('success Flickr API', response.data);
                             context.commit('SET_LOCATION_PIX', response.data.photos.photo[0])
@@ -125,9 +110,9 @@ export default new Vuex.Store({
 
                 })
                 .catch( error =>{
-                    console.log("error", error);
-                    console.log("NO DATA :/ !");
+                    console.log(error);
                     context.commit('SET_LOADING', false);
+                    context.commit('SET_ERROR', 404)
                 })
         }
     }

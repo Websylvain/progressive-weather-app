@@ -9,6 +9,7 @@
     </v-navigation-drawer>
     <v-toolbar app flat dark absolute color="transparent">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title><h1 v-if="location">{{location.name}}, {{location.country}}</h1></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click.native.stop="dialog = true">
         <v-icon>search</v-icon>
@@ -77,8 +78,6 @@ export default {
           // GET POSITION
           navigator.geolocation.getCurrentPosition((position) => {
 
-
-
               this.geohash = {
                 lat: position.coords.latitude,
                 long: position.coords.longitude,
@@ -89,29 +88,31 @@ export default {
               if(this.$route.name == 'error'){
                 this.$router.push('/');
               }
+
               // API OPEN WEATHER MAP SEARCH
-              this.$store.dispatch('setGeo', true);
+              this.$store.dispatch('setLoading', true);
               this.$store.dispatch('loadWeather', this.geohash);
 
-
           }, (err) => {
+
               // error handling here
               console.log("GEOLOCATION ERR", err);
-              // NO SEARCH & GO TO ERROR PAGE
-              this.$store.dispatch('setGeo', false);
-              this.$router.push('/error');
+              this.$store.dispatch('setLoading', false);
+              this.$router.push('/error/no-geo');
 
           })
       } else {
           console.error('Cannot access geolocation');
-          this.$store.dispatch('setGeo', false);
-          this.$router.push('/error');
+          this.$store.dispatch('setLoading', false);
+          this.$router.push('/error/no-geo');
       }
     }
   },
   computed: {
     ...mapGetters([
-      'loading'
+      'loading',
+      'location',
+      'error'
     ]),
     year(){
       return this.date.getFullYear();
@@ -119,6 +120,13 @@ export default {
     period(){
       let hour = this.date.getHours();
       return (hour > 5 && hour < 18)? 'app--day': 'app--night';
+    }
+  },
+  watch:{
+    error(n, o){
+      if (n == 404){
+        this.$router.push('/error/no-data');
+      }
     }
   }
 }

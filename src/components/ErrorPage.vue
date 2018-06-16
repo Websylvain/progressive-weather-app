@@ -1,9 +1,13 @@
 <template>
   <section class="errorPage">
     <header class="header">
-      <h1>
+      <h1 v-if="errorType === 'no-geo'">
         <v-icon>location_off</v-icon>
         <span>NO GPS DATA...</span>
+      </h1>
+      <h1 v-if="errorType === 'no-data'">
+        <v-icon>sentiment_very_dissatisfied</v-icon>
+        <span>NO RESULTS, LOCATION NOT FOUND...</span>
       </h1>
     </header>
     <section class="errorMessage">
@@ -13,8 +17,6 @@
 </template>
 
 <script>
-import { mapGetters} from 'vuex'
-import weather from '@/stores/weather.js'
 
 export default {
   name: 'ErrorPage',
@@ -25,11 +27,6 @@ export default {
   },
   mounted(){
     this.errorType = this.$route.params.type;
-  },
-  computed:{
-    ...mapGetters([
-      'params',
-    ])
   }
 }
 </script>

@@ -1,12 +1,8 @@
 <template>
   <section class="hello">
     <header class="currentWeather" v-if="weather.main" v-lazyimg="getFlickImg()">
-      <h1 class="location">
-        <span class="country">{{location.country}}</span>
-        <span class="city">{{location.name}}</span>
-      </h1>
       <v-layout class="hero">
-        <v-flex xs7>
+        <v-flex xs8>
           <div class="hero--temp">
             <span v-round="weather.main.temp"></span>°
           </div>
@@ -20,7 +16,7 @@
             <p><i class="wi wi-humidity"></i><span> {{weather.main.humidity}}%</span></p>
           </div>
         </v-flex>
-        <v-flex xs5>
+        <v-flex xs4>
         </v-flex>
       </v-layout>
     </header>
@@ -119,9 +115,9 @@ export default {
   .currentWeather{
     color:white;
     background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    padding-top:200px;
+    background-position: center, bottom;
+    background-color:grey;
+    padding-top: 45vh;
   }
 
   .hero{
@@ -140,7 +136,8 @@ export default {
   .location{
     text-align: center;
     text-transform: uppercase;
-    position: relative;margin-bottom:50px;
+    position: relative;
+    margin-bottom: 25%;
   }
 
   .location .city{
@@ -159,6 +156,10 @@ export default {
   .weatherSum{
     position: relative;
     padding-top: 20px;
+  }
+
+  @media (min-width: 1200px) {
+    padding-top: 20%;
   }
 
 </style>
